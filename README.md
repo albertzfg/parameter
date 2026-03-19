@@ -39,19 +39,112 @@
 - **路由**：vue-router 3
 - **构建工具**：webpack 3
 
-## 快速开始
+## 🌐 在线访问（无需安装）
+
+本项目已通过 GitHub Pages 自动部署，**直接用浏览器打开**即可使用：
+
+👉 **https://albertzfg.github.io/parameter/**
+
+> 如果页面显示空白，请在地址末尾加上 `#/omron-axis`：
+> `https://albertzfg.github.io/parameter/#/omron-axis`
+
+---
+
+## 💻 本地运行（开发模式）
+
+### 前提条件
+
+在运行本项目之前，请确保已安装：
+
+| 软件 | 最低版本 | 下载地址 |
+|------|----------|----------|
+| **Node.js** | ≥ 6.0 （推荐 LTS 版） | https://nodejs.org/ |
+| **npm** | ≥ 3.0 （随 Node.js 一起安装） | — |
+
+安装完成后，在终端执行以下命令验证：
 
 ```bash
-# 安装依赖
+node -v   # 应显示 v6.x.x 或更高
+npm -v    # 应显示 3.x.x 或更高
+```
+
+### 步骤一：克隆或下载项目
+
+```bash
+git clone https://github.com/albertzfg/parameter.git
+cd parameter
+```
+
+或者直接在 GitHub 页面点击 **Code → Download ZIP**，解压后进入项目目录。
+
+### 步骤二：安装依赖
+
+```bash
 npm install
+```
 
-# 启动开发服务器（localhost:8080）
+> 首次运行需要联网下载依赖包，约需 1-3 分钟，请耐心等待。
+
+### 步骤三：启动开发服务器
+
+```bash
 npm run dev
+# 或等价命令：
+npm start
+```
 
-# 生产构建
+启动成功后，终端会显示类似以下内容：
+
+```
+ DONE  Compiled successfully in 3000ms
+
+ I  Your application is running here: http://localhost:8080
+```
+
+### 步骤四：用浏览器打开
+
+在浏览器地址栏输入并访问：
+
+```
+http://localhost:8080/#/omron-axis
+```
+
+即可看到欧姆龙PLC 轴运动控制功能块参数手册页面。
+
+> **停止服务器**：在终端按 `Ctrl + C`
+
+---
+
+## 🔧 常见问题
+
+**Q: 执行 `npm install` 时报错 / 速度很慢**
+
+将 npm 镜像切换为国内源（淘宝镜像）：
+
+```bash
+npm config set registry https://registry.npmmirror.com
+npm install
+```
+
+**Q: 端口 8080 已被占用**
+
+```bash
+# 指定其他端口（例如 8888）
+PORT=8888 npm run dev
+```
+
+然后访问 `http://localhost:8888/#/omron-axis`
+
+**Q: 浏览器打开后页面空白**
+
+请确认地址栏包含 `#/omron-axis` 路径。
+
+---
+
+## 📦 生产构建
+
+```bash
 npm run build
 ```
 
-启动后访问：
-- `http://localhost:8080/` — 首页
-- `http://localhost:8080/#/omron-axis` — 欧姆龙PLC 轴运动控制功能块参数手册
+构建产物输出到 `dist/` 目录，可部署到任意静态文件服务器。
