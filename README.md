@@ -41,12 +41,17 @@
 
 ## 🌐 在线访问（无需安装）
 
-本项目已通过 GitHub Pages 自动部署，**直接用浏览器打开**即可使用：
+本项目通过 GitHub Actions 自动构建并部署到 GitHub Pages。
 
-👉 **https://albertzfg.github.io/parameter/**
+👉 **https://albertzfg.github.io/parameter/#/omron-axis**
 
-> 如果页面显示空白，请在地址末尾加上 `#/omron-axis`：
-> `https://albertzfg.github.io/parameter/#/omron-axis`
+> **如果链接打不开**，说明仓库还未启用 GitHub Pages，请仓库管理员按以下步骤一次性开启：
+>
+> 1. 打开仓库页面 → 点击顶部 **Settings（设置）**
+> 2. 左侧菜单找到 **Pages**
+> 3. **Source（来源）** 下拉框选择 **Deploy from a branch**
+> 4. **Branch** 选择 **`gh-pages`** → 目录选 **`/ (root)`**
+> 5. 点击 **Save**，等待约 1-2 分钟后刷新即可访问
 
 ---
 
@@ -56,15 +61,18 @@
 
 在运行本项目之前，请确保已安装：
 
-| 软件 | 最低版本 | 下载地址 |
+| 软件 | 版本要求 | 下载地址 |
 |------|----------|----------|
-| **Node.js** | ≥ 6.0 （推荐 LTS 版） | https://nodejs.org/ |
+| **Node.js** | **6.0 – 16.x（`npm run dev` 开发服务器）/ 任意版本（`npm run build`）** | https://nodejs.org/ |
 | **npm** | ≥ 3.0 （随 Node.js 一起安装） | — |
+
+> ⚠️ **注意**：`npm run dev`（开发服务器）仅兼容 **Node.js ≤ 16**。
+> 如果你使用的是 Node.js 18 或更高版本，请参考下方"[使用构建产物运行](#-使用构建产物运行nodejs--16-均可)"章节。
 
 安装完成后，在终端执行以下命令验证：
 
 ```bash
-node -v   # 应显示 v6.x.x 或更高
+node -v   # 应显示 v16.x.x 或更低（如 v14.x.x 也可）
 npm -v    # 应显示 3.x.x 或更高
 ```
 
@@ -115,6 +123,31 @@ http://localhost:8080/#/omron-axis
 
 ---
 
+## 🚀 使用构建产物运行（Node.js ≥ 16 均可）
+
+如果你使用 Node.js 18 及以上版本，`npm run dev` 会报错。可以改用以下方式：先构建，再用任意静态文件服务器预览。
+
+```bash
+# 1. 安装依赖
+npm install
+
+# 2. 构建（所有 Node 版本均兼容）
+npm run build
+
+# 3. 全局安装一个简单的静态服务器（只需安装一次）
+npm install -g serve
+
+# 4. 在 dist 目录启动服务（-s 保证 SPA 路由刷新不 404）
+serve -s dist
+
+# 或者使用 npx（无需全局安装）
+npx serve -s dist
+```
+
+启动后，终端显示的地址（通常是 `http://localhost:3000`）即为访问地址，在地址后加上 `/#/omron-axis` 即可。
+
+---
+
 ## 🔧 常见问题
 
 **Q: 执行 `npm install` 时报错 / 速度很慢**
@@ -134,6 +167,12 @@ PORT=8888 npm run dev
 ```
 
 然后访问 `http://localhost:8888/#/omron-axis`
+
+**Q: `npm run dev` 报错 `No such module: http_parser`**
+
+你的 Node.js 版本过高（≥ 18），开发服务器不兼容。请：
+- 安装 Node.js v16 LTS（推荐使用 [nvm](https://github.com/nvm-sh/nvm) 管理多版本）
+- 或改用上方"使用构建产物运行"的方式
 
 **Q: 浏览器打开后页面空白**
 
